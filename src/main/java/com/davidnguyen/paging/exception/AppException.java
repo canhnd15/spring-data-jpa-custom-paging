@@ -1,11 +1,11 @@
-package com.laptrinhb2a.PagingCustom.exception;
+package com.davidnguyen.paging.exception;
 
 import org.hibernate.service.spi.ServiceException;
 
 import java.util.List;
 
 public class AppException extends ServiceException {
-    private String errorCode;
+    private final String errorCode;
     private String message;
     private List<String> errorField;
     private String type;

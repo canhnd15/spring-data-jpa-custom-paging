@@ -1,4 +1,4 @@
-package com.laptrinhb2a.PagingCustom.utils;
+package com.davidnguyen.paging.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;

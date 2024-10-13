@@ -1,7 +1,8 @@
-package com.laptrinhb2a.PagingCustom.utils;
+package com.davidnguyen.paging.utils;
 
-import javax.persistence.Tuple;
-import javax.persistence.TupleElement;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TupleElement;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -107,7 +108,7 @@ public class DataUtil {
             if (String.class.getName().equalsIgnoreCase(targetFieldTypeName)) {
                 if (sourceItemData instanceof String || sourceItemData instanceof Long || sourceItemData instanceof Character) {
                     targetFieldItem.set(target, DataUtil.safeToString(sourceItemData));
-                } else if (sourceItemData instanceof Date || sourceItemData instanceof java.sql.Timestamp) {
+                } else if (sourceItemData instanceof Date) {
                     targetFieldItem.set(target, DateUtil.date2StringByPattern(DataUtil.safeToDate(sourceItemData), dateFormat));
                 }
             } else if (Long.class.getName().equalsIgnoreCase(targetFieldTypeName) || long.class.getName().equalsIgnoreCase(targetFieldTypeName)) {
@@ -227,9 +228,11 @@ public class DataUtil {
         }
     }
 
-    public static String convertToLikeConditional(String conditional) {
-        conditional = conditional.replace("%", "\\%").replace("_", "\\_");
+    public static String toQueryLike(String request) {
+        return !isNullOrEmpty(request) ? "%" + NVL(request, "") + "%" : null;
+    }
 
-        return "%" + conditional + "%";
+    public static String NVL(String s, String defaultStr) {
+        return Objects.isNull(s) ? defaultStr : s;
     }
 }
